@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('html/head.html', {
+    'title': 'Главная'
+})
+
+<body>
+  @@include('html/header.html',{})
+   
+
+
+  <div id="wrapper">
+    <div id="menu">
+      <ul id="notes">
+       
+      </ul>
+      <div id="create">
+        <button class="write">создать</button>
+      </div>
+    </div>
+    <div id="text">
+      <textarea></textarea>
+      <button class="save" data-mode="create">сохранить</button>
+    </div>
+  </div>
+
+
+
+
+  @@include('html/footer.html',{})
+
+  
+  <script src="./js/app.min.js"></script>
+</body>
+</html>
+
+    
+   

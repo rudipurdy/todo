@@ -1,74 +1,64 @@
-let btn1 = document.querySelector('.save')
-let btn2 = document.querySelector('.write')
-let textArea = document.querySelector('textarea')
-let notes = document.querySelector('#notes')
+const btn1 = document.querySelector('.save')
+const btn2 = document.querySelector('.write')
+const textArea = document.querySelector('textarea')
+const notes = document.querySelector('#notes')
+const textElement = document.querySelector('#text')
 
 
-let texts = []    
+let tasks = []    
 
+function createTask() {
+    const task = document.createElement('li')
+    task.textContent = prompt('Введите название задачи')
+    tasks.push({task, text:''})
+    notes.appendChild(task)
+}
 
-
-
-btn1.addEventListener('click', function(){
+function openTask(e) {
+    const task = e.target
+   
+    if(task.tagName !== 'LI') return // на всякий случай проверка точно ли по элементу li тыкнули
+    setActiveTask(task)
     
-    texts.push(textArea.value)
+    const activeTask = getActiveTaskFromArray()
+    textArea.value = activeTask.text || ''
+    textContetActive()
+}
 
-    let li = document.createElement('li')
-    notes.appendChild(li)
+function saveText() { // тут мы кароче с помощью функции getActiveTaskFromArray получаем объект с активной таской и меняем внутри нее текст. так как мы получаем ссылку на объект
+    //то при ее изменении этот объект меняется и в самом массиве
+    const textValue = textArea.value
+   
+    const activeTask = getActiveTaskFromArray()
+    activeTask.text = textValue
 
+}
 
-    let li_Collection = document.getElementsByTagName('li')
-    let note = Array.prototype.slice.call( li_Collection )
+function textContetActive() { // textarea делаем видимой
+    if (textElement.style.display === 'block') return
 
+    textElement.style.display = 'block'
+}
 
-    for(let i = 0; i < note.length; i++){
-        note[i].addEventListener('click', function(){
-            for(let d = 0; d < note.length; d++){
-                note[d].classList.remove('active')
-            }
-            note[i].classList.add('active')
-        })
-    }
-
-
-
-    note.forEach(item =>{
-        
-        let num = texts.length
-        li.textContent = `Запись ${num}`
-        li.dataset.key = num 
-        
-        item.addEventListener('click', function(event){
-            if(item.classList.contains('active')){
-                btn1.setAttribute('data-mode', 'update')
-                btn1.dataset.key = num
-            }
-                
-            if(item.classList.contains('active') == false){
-                btn1.setAttribute('data-mode', 'create')
-            }
-            
-            texts.forEach((item, index) =>{
-
-                if(index == event.target.dataset.key){
-                    textArea.value = item
-                }
-            })
-            
-        })
-        
+function getActiveTaskFromArray() {
+    //через деструктаризацию получаю нужный объект(у которго data-active = true) из массива tasks
+    const [activeTask] = tasks.filter(({task}) => {
+        return task.dataset.active === 'true'
     })
-    
-    btn2.addEventListener('click', function(){
-       
-        btn1.setAttribute('data-mode', 'create')
+
+    return activeTask
+}
+
+function setActiveTask(task) { // делаем тыкнутую таску активной а все остальные неактивными
+    tasks.forEach(({task}) => {
+        task.dataset.active = false
     })
-    
-    
-    textArea.focus()
-    textArea.value = ''
-})
-            
+    task.dataset.active = true
+}
+
+btn2.addEventListener('click', createTask)
+notes.addEventListener('click', openTask)
+btn1.addEventListener('click', saveText)
 
 
 

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная</title>
     <link rel="stylesheet" href="css/style.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Raleway:wght@600&family=Roboto+Mono&display=swap" rel="stylesheet">
     
 </head>
 
@@ -16,19 +19,23 @@
     
 
    
-
+  <div class="popup">
+    <p>Добавьте вашу задачу</p>
+    <input cols="30" rows="15"></input>
+  </div>
 
   <div id="wrapper">
     <div id="menu">
+      <p id="info">Список дел пуст</p>
       <ul id="notes">
-       
+        
       </ul>
       <div id="create">
         <button class="write">создать</button>
       </div>
     </div>
     <div id="text">
-      <textarea></textarea>
+      <textarea placeholder="Опишите подробно вашу задачу"></textarea>
       <button class="save" data-mode="create">сохранить</button>
     </div>
   </div>

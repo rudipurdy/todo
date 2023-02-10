@@ -1,9 +1,9 @@
 body{
   padding: 0;
   margin: 0;
-  background-color: #fff;
+  background-color: #c5c4c4;
   height: 100%;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto Mono', monospace;
 }
 *{
   padding: 0;
@@ -26,9 +26,9 @@ li{
 //---------------------------//
 
 #wrapper {
-	width: 500px;
+	max-width: 500px;
 	margin: 0 auto;
-  margin-top: 10%;
+  	margin-top: 10%;
 	position: relative;
 }
 
@@ -36,32 +36,75 @@ li{
 	width: 150px;
 	position: absolute;
 	right: 105%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	#info{
+		margin-bottom: 25px;
+	}
 }
+
 #notes {
 	padding: 0;
 	margin: 0;
 }
+
 #notes li {
+	color: #000; /* Цвет обычной ссылки */
+	font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none; /* Убираем подчеркивание */
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	padding: 5px;
-	text-align: center;
-	margin-bottom: 10px;
-	border: 1px solid gray;
-	border-radius: 7px;
-	cursor: pointer;
 }
 
-li.active {
-	background-color: #78DBE2;
+#notes li:after{
+	content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px; /* Высота линии */
+    background-color: #a04c03; /* Цвет подчеркивания при исчезании линии*/
+    transition: width 0.5s; /* Время эффекта */
 }
+
+#notes li:hover:after {
+	content: "";
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 2px; /* Высота линии */
+    background-color: #e66e06; /* Цвет подчеркивания при появлении линии*/
+    transition: width 0.5s;  /* Время эффекта */
+}
+
+
 	
-#notes li:hover, #notes li.active {
-	background: #78DBE2;
-	transition: 0.25s;
-}
+// #notes li:hover, #notes li.active {
+// 	background: #F4A460;
+// 	transition: 0.25s;
+// }
 
 #create button {
-	width: 100%;
-	padding: 5px;
+	width: 130px;
+	height: 30px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	background-color: #000;
+	// border: 1px solid;
+	color: #fff;
+	font-weight: 600;
 }
 
 #text textarea {
@@ -70,11 +113,71 @@ li.active {
 	box-sizing: border-box;
 	padding: 10px;
 	margin-bottom: 10px;
+	outline: 0;
+	outline-offset: 1;
+	border-radius: 10px;
+	transition: 0.3s;
+	font-weight: 600;
+	font-size: 20px;
 }
+
+textarea:focus{
+	transition: 0.3s;
+	box-shadow: 0px 15px 60px 0px rgba(34, 60, 80, 0.4);
+}
+
 #text button {
 	width: 100%;
 	height: 30px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	background-color: #f4a460;
+	border: 1px solid;
+	color: #000;
+	font-weight: 600;
 }
 #text {
 	display: none;
+}
+
+.popup{
+	position: absolute;
+	margin: 0 auto;
+	width: 300px;
+	height: 400px;
+	display: none;
+	opacity: 0;
+	background-color: #f4a460;
+	align-items: center;
+	flex-direction: column;
+	top: 16%;
+	left: 40%;
+	border-radius: 10px;
+	transition: 0.25s;
+
+	
+
+	p{
+		margin-top: 20px;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	input{
+		margin-top: 30px;
+		padding-left: 10px;
+		width: 230px;
+		border: 1px solid;
+		padding: 10px;
+		font-weight: 600;
+		border-radius: 10px;
+		outline: 0;
+		outline-offset: 0;
+	}
+}
+
+.popup.active{
+	opacity: 1;
+	transition: 0.3s;
+	display: flex;
 }

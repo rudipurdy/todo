@@ -7,19 +7,23 @@
 <body>
   @@include('html/header.html',{})
    
-
+  <div class="popup">
+    <p>Добавьте вашу задачу</p>
+    <input cols="30" rows="15"></input>
+  </div>
 
   <div id="wrapper">
     <div id="menu">
+      <p id="info">Список дел пуст</p>
       <ul id="notes">
-       
+        
       </ul>
       <div id="create">
         <button class="write">создать</button>
       </div>
     </div>
     <div id="text">
-      <textarea></textarea>
+      <textarea placeholder="Опишите подробно вашу задачу"></textarea>
       <button class="save" data-mode="create">сохранить</button>
     </div>
   </div>
